@@ -1,1 +1,0 @@
-# beeguriri.github.io
