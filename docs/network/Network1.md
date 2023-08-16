@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Menu2-Child1
+title: Network1
 nav_order: 1
-parent: Menu2
+parent: Network
 ---
 
 

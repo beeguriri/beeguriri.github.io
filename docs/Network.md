@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Menu2
+title: Network
 nav_order: 3
 has_children: true
-permalink: /docs/menu2
+permalink: /docs/network
 ---
 
 
