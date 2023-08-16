@@ -15,7 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 title: Just Do
 description: 하면 해
-baseurl: "/" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://beeguriri.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 # repository: beeguriri.github.io # for github-metadata
 
