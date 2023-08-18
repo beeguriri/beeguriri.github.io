@@ -86,3 +86,24 @@ parent: Network
 - 애니캐스트
   - 하나의 호스트에서, 같은 접두어 가진 멤버 중 하나의 호스트로 패킷 전송
   - 물리적으로 같은 네트워크는 같은 접두어를 가짐
+
+
+
+## 📑 인터넷 계층 프로토콜
+
+### ⭐ ICMP
+
+- 송신측의 상황과 목적지 노드의 상황을 진단하는 프로토콜
+- ICMP 메시지
+  - ICMP Echo Request/Reply : 송신측 패킷이 목적지나 라우터에 도착했는지 확인
+  - ICMP Destination Unreachable
+  - ICMP Redirect : 해당 노드에 대한 최적화된 경로 다시 지정
+  - CIMP Time Exceeded
+  - ICMP Source Quench : 혼잡 제어
+
+
+
+### ⭐ ARP / RARP
+
+- 다음 네트워크 인터페이스의 MAC 주소 알아내는데 사용
+- 브로드캐스트를 통해 특정 IP 주소 사용하는 호스트가 응답 하도록 요구하는 방식
