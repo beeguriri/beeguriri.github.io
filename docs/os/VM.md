@@ -23,6 +23,10 @@ parent: os
 - 외부 단편화가 발생하지 않음
 - 페이지 크기를 작게 설계함으로써 내부 단편화 줄일 수 있음
 
+![](https://github.com/beeguriri/beeguriri.github.io/blob/main/docs/img/paging.PNG?raw=true)
+
+
+
 
 
 ### ⭐ 페이지 교체 정책
