@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 힙
-nav_order: 2
+nav_order: 5
 parent: Data Structure
 ---
 
