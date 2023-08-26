@@ -62,6 +62,8 @@ parent: Information Security
 
 ### ⭐ 동작 과정 상세
 
+![](https://github.com/beeguriri/beeguriri.github.io/blob/main/docs/img/keberos.PNG?raw=true)
+
 - 사용자-클라이언트 기반 로그인
   - 클라이언트는 사용자로부터 아이디, 비밀번호를 입력 받음
   - 비밀번호를 대칭키로 변환하여 암호키 생성
