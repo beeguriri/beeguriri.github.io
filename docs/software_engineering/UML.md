@@ -110,3 +110,21 @@ class User {
 - 점선 + 빈 삼각형
 - `<<interface>>` 의 메서드 구현
 
+
+
+## 📑 유즈케이스 다이어그램
+
+### ⭐ 포함
+
+- 반드시 포함(사용)하는 관계
+
+### ⭐ 확장
+
+- 필요 시 선택하는 관계
+
+![](https://github.com/beeguriri/beeguriri.github.io/blob/main/docs/img/usecase.jpeg?raw=true)
+
+- 상품주문, 주문결재 시 반드시 로그인을 해야 함
+  - 로그인에 포함되어야 하는 관계 `<<include>>`
+- 주문결재 시 현금, 카드, 포인트를 사용할 수 있음
+  - 주문결재에 확장 되는 관계 `<<extend>>`
