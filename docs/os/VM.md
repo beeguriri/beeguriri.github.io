@@ -32,7 +32,11 @@ parent: os
 ### ⭐ 페이지 교체 정책
 
 - FIFO (First In First Out) : Queue
+  - Belady's anomaly : 페이지의 개수를 확장했음에도 페이지 폴트가 늘어남
+
 - LRU (Least Recently Used) : Stack
+  - 구현 오버헤드가 큼
+
 - LFU (Least Frequently Used) : 참조 횟수에 대한 `계수기`를 가지며 그 값이 가장 작은 페이지가 교체
 - NUR (Not Used Recently) : 각 페이지 당 `참조비트`, `변형비트`를 가지고 이 값으로 교체할 페이지 선택
 
