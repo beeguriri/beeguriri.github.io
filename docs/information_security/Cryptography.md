@@ -54,6 +54,9 @@ parent: Information Security
 | EIGamel   | 지수합동 | 이산대수   | 가능   | 가능    | 가능     |
 | ECC       | 타원곡선 | 타원곡선   | 가능   | 가능    | 가능     |
 
+- D-Hellman : (g, p) => g^`a` % p
+- RSA : (e, N) => `a`^e % N
+
 
 
 ### ⭐ 단방향 (무결성) - 해시
