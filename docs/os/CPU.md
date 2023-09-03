@@ -1,7 +1,7 @@
 ---
 layout: default
 title: (참고) CPU
-nav_order: 8
+nav_order: 10
 parent: os
 ---
 
