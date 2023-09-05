@@ -88,3 +88,16 @@ parent: DataBase
 | read(y)     |           |                               |
 | rollback T1 |           | T2 트랜잭션 롤백 불가         |
 
+
+
+## 📑 독립성 레벨
+
+|                  | Dirty Read | Non Repeatable Read | Phantom Read |
+| ---------------- | ---------- | ------------------- | ------------ |
+| Read Uncommitted | O          | O                   | O            |
+| Read Committed   | X          | O                   | O            |
+| Repeatable Read  | X          | X                   | O            |
+| Serializable     | X          | X                   | X            |
+
+- Dirty Read : `Rollback`
+- Phantom Read : `Insert into`
