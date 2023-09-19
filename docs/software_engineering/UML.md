@@ -126,7 +126,7 @@ class User {
 
 ![](https://github.com/beeguriri/beeguriri.github.io/blob/main/docs/img/usecase.JPG?raw=true)
 
-- 상품주문, 주문결재 시 반드시 로그인을 해야 함
+- 상품주문, 주문결제 시 반드시 로그인을 해야 함
   - 로그인에 포함되어야 하는 관계 `<<include>>`
-- 주문결재 시 현금, 카드, 포인트를 사용할 수 있음
-  - 주문결재에 확장 되는 관계 `<<extend>>`
+- 주문결제 시 현금, 카드, 포인트를 사용할 수 있음
+  - 주문결제에 확장 되는 관계 `<<extend>>`
