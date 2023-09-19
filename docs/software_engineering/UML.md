@@ -66,6 +66,8 @@ parent: Software Engineering
 
 ## 📑 클래스 다이어그램
 
+![](https://github.com/beeguriri/beeguriri.github.io/blob/main/docs/img/uml.JPG?raw=true)
+
 ### ⭐ 연관 관계, 의존관계
 
 - 어떤 클래스가 다른클래스를 참조
@@ -122,7 +124,7 @@ class User {
 
 - 필요 시 선택하는 관계
 
-![](https://github.com/beeguriri/beeguriri.github.io/blob/main/docs/img/usecase.jpeg?raw=true)
+![](https://github.com/beeguriri/beeguriri.github.io/blob/main/docs/img/usecase.JPG?raw=true)
 
 - 상품주문, 주문결재 시 반드시 로그인을 해야 함
   - 로그인에 포함되어야 하는 관계 `<<include>>`
