@@ -1,6 +1,6 @@
 ---
 layout: default
-title: [Spring] Redis
+title: Springboot - Redis
 nav_order: 1
 parent: Backend
 ---
