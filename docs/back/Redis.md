@@ -87,7 +87,7 @@ public class RedisConfig {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory()); //연결 설정
 
-        //데이터는 key: {{}, {},...} 형태의 json으로 mapping
+        //데이터는 key: json value로 들어옴
         //redis template 설정
         //일반적인 key:value 의 경우 serializer
         template.setKeySerializer(new StringRedisSerializer());
