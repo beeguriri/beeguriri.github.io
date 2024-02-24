@@ -44,129 +44,127 @@ parent: Backend
 
 ### ✨ Springboot 사용하기 (기본)
 1. dependency 추가
-```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-data-redis</artifactId>
-</dependency>
-```
-
+    ```xml
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+    ```
 2. application.yml 파일에 redis 설정 추가
-```yaml
-spring:
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 6379
-```
-
+    ```yaml
+    spring:
+    data:
+        redis:
+        host: 127.0.0.1
+        port: 6379
+    ```
 3. configuration 작성 (option)
 - 기본적으로는 springboot auto configuration 제공하므로
 - 필요 시 작성
-```java
-@Configuration
-public class RedisConfig {
+        ```java
+        @Configuration
+        public class RedisConfig {
 
-    @Value("${spring.data.redis.host}")
-    private String host;
+            @Value("${spring.data.redis.host}")
+            private String host;
 
-    @Value("${spring.data.redis.port}")
-    private int port;
+            @Value("${spring.data.redis.port}")
+            private int port;
 
-   @Bean
-    public RedisConnectionFactory redisConnectionFactory() {
-        //>> Jedis
-//        return new JedisConnectionFactory(new RedisStandaloneConfiguration(host, port));
-        //>> Lettuse
-        return new LettuceConnectionFactory(host, port);
-    }
+        @Bean
+            public RedisConnectionFactory redisConnectionFactory() {
+                //>> Jedis
+        //        return new JedisConnectionFactory(new RedisStandaloneConfiguration(host, port));
+                //>> Lettuse
+                return new LettuceConnectionFactory(host, port);
+            }
 
-   @Bean
-    public RedisTemplate<String, Object> redisTemplate() {
+        @Bean
+            public RedisTemplate<String, Object> redisTemplate() {
 
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(redisConnectionFactory()); //연결 설정
+                RedisTemplate<String, Object> template = new RedisTemplate<>();
+                template.setConnectionFactory(redisConnectionFactory()); //연결 설정
 
-        //데이터는 key: json value로 들어옴
-        //redis template 설정
-        //일반적인 key:value 의 경우 serializer
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
+                //데이터는 key: json value로 들어옴
+                //redis template 설정
+                //일반적인 key:value 의 경우 serializer
+                template.setKeySerializer(new StringRedisSerializer());
+                template.setValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
 
-        //hash 사용 할 경우 serializer
-        template.setHashKeySerializer(new StringRedisSerializer());
-        template.setHashValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
+                //hash 사용 할 경우 serializer
+                template.setHashKeySerializer(new StringRedisSerializer());
+                template.setHashValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
 
-        //기본 serializer는 일단 string type으로 설정해보자!
-        template.setEnableDefaultSerializer(true);
-        template.setDefaultSerializer(new StringRedisSerializer());
+                //기본 serializer는 일단 string type으로 설정해보자!
+                template.setEnableDefaultSerializer(true);
+                template.setDefaultSerializer(new StringRedisSerializer());
 
-        return template;
-    }
+                return template;
+            }
 
-}
-```
+        }
+    ```
 
 4. RedisOperations 인터페이스를 이용하여 redis에 CRUD
-```java
-private final RedisOperations<String, String> redisOperations;
+    ```java
+    private final RedisOperations<String, String> redisOperations;
 
-//1. 전체 키 가져오기
-Set<String> keys = redisOperations.keys("*"); //패턴을 넣어주면 패턴에 따른 키 가져올 수 있음
+    //1. 전체 키 가져오기
+    Set<String> keys = redisOperations.keys("*"); //패턴을 넣어주면 패턴에 따른 키 가져올 수 있음
 
-//2. 데이터 가져오기
-String data = redisOperations.opsForValue().get(key);
-List<Object> values = redisOperations.opsForHash().values(key);
+    //2. 데이터 가져오기
+    String data = redisOperations.opsForValue().get(key);
+    List<Object> values = redisOperations.opsForHash().values(key);
 
-//3. 데이터 추가하기
-//key-value 형태이므로 key가 중복 될 경우 key의 값을 덮어씀
-redisOperations.opsForValue().set(key, jsonStr);
-redisOperations.opsForHash().put(key, "hashKey", jsonStr);
+    //3. 데이터 추가하기
+    //key-value 형태이므로 key가 중복 될 경우 key의 값을 덮어씀
+    redisOperations.opsForValue().set(key, jsonStr);
+    redisOperations.opsForHash().put(key, "hashKey", jsonStr);
 
-//4. 데이터 삭제하기
-redisOperations.delete(key);
-```
+    //4. 데이터 삭제하기
+    redisOperations.delete(key);
+    ```
 
 ### ✨ Springboot - Redis Cache 사용하기
 1. config 작성
-```java
-@Configuration
-@EnableCaching
-@RequiredArgsConstructor
-public class RedisCacheConfig {
+    ```java
+    @Configuration
+    @EnableCaching
+    @RequiredArgsConstructor
+    public class RedisCacheConfig {
 
-    private final ObjectMapper objectMapper;
+        private final ObjectMapper objectMapper;
 
-    @Bean
-    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
-        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration
-                .defaultCacheConfig()
-                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer(objectMapper)))
-                .entryTtl(Duration.ofMinutes(3L));
+        @Bean
+        public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+            RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration
+                    .defaultCacheConfig()
+                    .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
+                    .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer(objectMapper)))
+                    .entryTtl(Duration.ofMinutes(3L));
 
-        return RedisCacheManager.RedisCacheManagerBuilder
-                .fromConnectionFactory(redisConnectionFactory)
-                .cacheDefaults(redisCacheConfiguration)
-                .build();
+            return RedisCacheManager.RedisCacheManagerBuilder
+                    .fromConnectionFactory(redisConnectionFactory)
+                    .cacheDefaults(redisCacheConfiguration)
+                    .build();
 
+        }
     }
-}
-```
+    ```
 
 2. 사용하고자 하는 곳에 @Cacheable 붙여주기
-```java
-@Cacheable(value = "user", cacheManager = "cacheManager")
-public List<Meter> getAllMeters() {
-    log.info("여기>>>getAllMeters()");
-    return meterRepository.findAll();
-}
-```
+    ```java
+    @Cacheable(value = "user", cacheManager = "cacheManager")
+    public List<Meter> getAllMeters() {
+        log.info("여기>>>getAllMeters()");
+        return meterRepository.findAll();
+    }
+    ```
 
 3. 확인
 - 첫번째 요청 시 619ms
-![](./images/first_req.png)
+![](https://github.com/beeguriri/beeguriri.github.io/blob/main/docs/back/images/first_req.png?raw=true)
 - 두번째 요청 시 28ms
-![](./images/second_req.png)
+![](https://github.com/beeguriri/beeguriri.github.io/blob/main/docs/back/images/second_req.png?raw=true)
 - redis gui 확인
-![](./images/redis.png)
+![](https://github.com/beeguriri/beeguriri.github.io/blob/main/docs/back/images/redis.png?raw=true)
